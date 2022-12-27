@@ -1,0 +1,13 @@
+GET http://localhost:3000/ 
+###
+POST http://localhost:3000/adduser
+Content-Type: application/json 
+
+{
+ "username":"NandaKumar",
+ "email":"nanduaru333@gmail.com",
+ "password":"Nanda@7328",
+ "phonenumber":8971399165
+}
+
+
