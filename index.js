@@ -15,19 +15,53 @@ const port = process.env.PORT || 3000
 app.post('/adduser',async(request,response) => {
     const {username,email,password,phonenumber} = request.body
     try{
-       const newData = new Spritle({username,email,password,phonenumber})
-       await newData.save()
-       return response.json(await Spritle.find())
+          const checkdata = await Spritle.find()
+
+          const result = checkdata.map(eachData => {
+            if(username === eachData.username){
+                
+                return true
+            }else{
+                
+                return false
+            }
+          })
+          
+          if (result === true){
+            response.send(false)
+            response.status(400)
+           
+          }else{
+            const newData = new Spritle({username,email,password,phonenumber})
+            await newData.save()
+            response.send(true)
+          }
     } 
     catch(err){
         console.log(err.message)
     }
 })
 
+
+app.delete('/delete/:id',async(request,response)=> {
+     
+    const {id} = request.params 
+
+    try{
+       await Spritle.findByIdAndDelete(id)
+       response.send("dete successfully!..")
+    }
+    catch(err){
+        console.log(err.message)
+    }
+
+})
+
 app.get('/',async(request,response) => {
     
     try{
-       return response.json(await Spritle.find())
+       const data = await Spritle.find()
+       response.send(data)
     } 
     catch(err){
         console.log(err.message)

@@ -4,10 +4,13 @@ POST http://localhost:3000/adduser
 Content-Type: application/json 
 
 {
- "username":"NandaKumar",
- "email":"nanduaru333@gmail.com",
- "password":"Nanda@7328",
- "phonenumber":8971399165
+ "username":"ArunKumar",
+ "email":"arunnandu333@gmail.com",
+ "password":"Arun@7328",
+ "phonenumber":9964983218
 }
+
+### 
+DELETE http://localhost:3000/delete/63aae4477974bbb4d494a2da
 
 
