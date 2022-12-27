@@ -14,3 +14,11 @@ Content-Type: application/json
 DELETE http://localhost:3000/delete/63aae4477974bbb4d494a2da
 
 
+### 
+POST http://localhost:3000/login
+Content-Type: application/json 
+
+{
+    "email":"nanduaru333@gmail.com",
+    "password":"Nanda@7328"
+}

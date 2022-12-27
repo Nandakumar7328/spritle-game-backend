@@ -57,11 +57,19 @@ app.delete('/delete/:id',async(request,response)=> {
 
 })
 
-app.get('/',async(request,response) => {
-    
+app.post('/login',async(request,response) => {
+      const {email,password} = request.body
     try{
        const data = await Spritle.find()
-       response.send(data)
+       data.map(eachData => {
+        if (eachData.email === email && eachData.password === password){
+            response.send(true)
+        }
+        else{
+            response.status(400)
+            response.send(false)
+        }
+       })
     } 
     catch(err){
         console.log(err.message)
