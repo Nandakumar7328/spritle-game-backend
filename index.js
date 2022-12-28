@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const Spritle = require("./model")
+const { response } = require('express')
 const app = express()
 app.use(express.json())
 app.use(cors())
@@ -68,16 +69,26 @@ app.post('/login',async(request,response) => {
              userId = eachData._id
         }
        })
-
        if (result === true){
         response.send({status:true,userId:userId})
-        
        }
        else{
         response.status(400)
         response.send(false)
        }
     } 
+    catch(err){
+        console.log(err.message)
+    }
+})
+
+app.get('/user/:id',async(request,response) => {
+    const {id} = request.params 
+    
+    try{
+       const responseData =  await Spritle.findById(id)
+       response.send(responseData)
+    }
     catch(err){
         console.log(err.message)
     }

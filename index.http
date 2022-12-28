@@ -22,3 +22,6 @@ Content-Type: application/json
     "email":"keerthi@gmail.com",
     "password":"Keerthi@7328"
 }
+
+### 
+GET http://localhost:3000/user/63abad051e5b054c7fae2ed7
