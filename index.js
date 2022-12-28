@@ -16,14 +16,11 @@ app.post('/adduser',async(request,response) => {
     const {username,email,password,phonenumber} = request.body
     try{
           const checkdata = await Spritle.find()
-
-          const result = checkdata.map(eachData => {
+          let result = null 
+          checkdata.map(eachData => {
             if(username === eachData.username){
                 
-                return true
-            }else{
-                
-                return false
+                result = true
             }
           })
           
@@ -59,17 +56,27 @@ app.delete('/delete/:id',async(request,response)=> {
 
 app.post('/login',async(request,response) => {
       const {email,password} = request.body
-    try{
+       console.log(email,password)
+      try{
        const data = await Spritle.find()
-       data.map(eachData => {
-        if (eachData.email === email && eachData.password === password){
-            response.send(true)
-        }
-        else{
-            response.status(400)
-            response.send(false)
+       let result = null
+       let userId = null
+      data.map(eachData => {
+        if (email  === eachData.email){
+            console.log(eachData.email)
+             result = true
+             userId = eachData._id
         }
        })
+
+       if (result === true){
+        response.send({status:true,userId:userId})
+        
+       }
+       else{
+        response.status(400)
+        response.send(false)
+       }
     } 
     catch(err){
         console.log(err.message)
